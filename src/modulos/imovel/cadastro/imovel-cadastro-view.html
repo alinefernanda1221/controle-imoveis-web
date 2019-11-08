@@ -8,33 +8,36 @@
 	<h5 class="text-center">Dados Básicos</h5>
 	<hr style="width: 50%;">
 	<div class="d-flex justify-content-center">
-		<form ng-submit="imovelCadCtrl.cadastrarImovel()" novalidate id="form-cadastro-imovel" class="form form-group">
+		<form class="form form-group needs-validation" ng-submit="imovelCadCtrl.cadastrarImovel()" id="form-cadastro-imovel" name="imovelCadCtrl.formCadastroImovel"  novalidate>
 			<div class="row">
 				<div class="col-md-6">
 					<label for="nome">Nome</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.nome" id="nome">
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.nome" limit-to="30" id="nome">
 				</div>
 				<div class="col-md-6">
-					<label for="quartos">Qtd. quartos</label>
-					<input class="form-control" type="number" ng-model="imovelCadCtrl.quartos" id="quartos">
+					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.quartos.$invalid && !imovelCadCtrl.formIsValid }" for="quartos">Qtd. quartos *</label>
+					<input class="form-control" type="number" limit-to="2" ng-model="imovelCadCtrl.quartos" required name="quartos" id="quartos"
+							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.quartos.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-6">
-					<label for="tipo">Tipo imóvel</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.tipoImovel" id="tipo">
+					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.tipo.$invalid && !imovelCadCtrl.formIsValid }" for="tipo">Tipo imóvel *</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.tipoImovel" required id="tipo" name="tipo"
+							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.tipo.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 				<div class="col-md-6">
-					<label for="situacao">Situação</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.situacaoImovel" id="situacao">
+					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.situacao.$invalid && !imovelCadCtrl.formIsValid }" for="situacao">Situação *</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.situacaoImovel" required id="situacao" name="situacao"
+							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.situacao.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<label for="descricao">Descrição</label>
-					<textarea class="form-control" rows="3" ng-model="imovelCadCtrl.descricao" id="descricao">
+					<textarea class="form-control" rows="3" limit-to="200" ng-model="imovelCadCtrl.descricao" id="descricao">
 					</textarea>
 				</div>
 			</div>
@@ -56,19 +59,21 @@
 			<br>
 			<div class="row">
 				<div class="col-md-12">
-					<label for="logradouro">Logradouro</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.logradouro" id="logradouro">
+					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.logradouro.$invalid && !imovelCadCtrl.formIsValid }" for="logradouro">Logradouro *</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.logradouro" required id="logradouro" name="logradouro"
+							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.logradouro.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-4">
-					<label for="cidade">Cidade</label>
+					<label for="cidade">Cidade </label>
 					<input class="form-control" type="number" ng-model="imovelCadCtrl.cidade" id="cidade">
 				</div>
 				<div class="col-md-4">
-					<label for="estado">Estado</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.estado" id="estado">
+					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.estado.$invalid && !imovelCadCtrl.formIsValid }" for="estado">Estado *</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.estado" required id="estado" name="estado"
+							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.estado.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 				<div class="col-md-4">
 					<label for="numero">Número</label>
@@ -89,13 +94,13 @@
 			<hr>
 			<div class="container">
 				<div class="row justify-content-start">
-					<div class="col col-md-2">
+					<div class="col col-md-2 mr-auto">
 						<input class="btn btn-success" type="button" value="Voltar" ng-click="imovelCadCtrl.voltar()" />
 					</div>
-					<div class="col col-md-1 mr-auto">
+					<!-- <div class="col col-md-1 mr-auto">
 						<input class="btn btn-success" type="button" value="Limpar"
 							ng-click="imovelCadCtrl.limparTela()" />
-					</div>
+					</div> -->
 					<div class="col col-md-2">
 						<input class="btn btn-success" type="submit" value="Cadastrar" />
 					</div>
