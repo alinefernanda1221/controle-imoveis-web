@@ -37,7 +37,7 @@
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<label for="descricao">Descrição</label>
-					<textarea class="form-control" rows="3" limit-to="200" ng-model="imovelCadCtrl.descricao" id="descricao">
+					<textarea class="form-control" rows="3" maxlength="200" ng-model="imovelCadCtrl.descricao" id="descricao">
 					</textarea>
 				</div>
 			</div>
@@ -84,8 +84,7 @@
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<label for="observacao">Observação</label>
-					<textarea class="form-control" rows="3" ng-model="imovelCadCtrl.observacao"
-						id="observacao"></textarea>
+					<textarea class="form-control" maxlength="200" rows="3" ng-model="imovelCadCtrl.observacao" id="observacao"></textarea>
 				</div>
 			</div>
 			<br>
