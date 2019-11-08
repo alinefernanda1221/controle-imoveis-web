@@ -1,0 +1,109 @@
+<div class="jumbotron" style="width: 100%;">
+	<h1>Cadastrar Inquilino
+		<i class="fas fa-user-plus"></i>
+	</h1>
+	<hr>
+
+	<!--DADOS BÁSICOS-->
+	<h5 class="text-center">Dados Básicos</h5>
+	<hr style="width: 50%;">
+	<div class="d-flex justify-content-center">
+		<form ng-submit="inquilinoCadCtrl.cadastrarInquilino()" novalidate id="form-cadastro-inquilino"
+			class="form form-group">
+			<div class="row">
+				<div class="col-md-12">
+					<label for="nome">Nome</label>
+					<input class="form-control" type="text" ng-model="inquilinoCadCtrl.inquilino.nome" id="nome">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="sexo">Sexo</label>
+					<select class="form-control" ng-model="inquilinoCadCtrl.inquilino.sexo">
+						<option ng-repeat="sexo in inquilinoCadCtrl.opcoesSexo" value="{{sexo.sigla}}">{{sexo.nome}}</option>
+					</select>
+				</div>
+				<div class="col-md-6">
+					<label for="dataNascimento">Data de Nascimento</label>
+					<input class="form-control" type="date" ng-model="inquilinoCadCtrl.inquilino.dataNascimento"
+						id="dataNascimento">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="rg">RG</label>
+					<input class="form-control" type="text" ng-model="inquilinoCadCtrl.inquilino.rg" id="rg" ui-mask="9999-999">
+				</div>
+				<div class="col-md-6">
+					<label for="cpf">CPF</label>
+					<input class="form-control" type="text" ng-model="inquilinoCadCtrl.inquilino.cpf" id="cpf" ui-mask="999.999.999.99">
+				</div>
+			</div>
+			<br>
+
+			<!--DADOS DE CONTATO-->
+			<h5 class="text-center">Dados de Contato</h5>
+			<hr style="width: 50%;">
+			<div class="row">
+				<div class="col-md-12">
+					<label for="email">E-mail</label>
+					<input class="form-control" type="text" ng-model="inquilinoCadCtrl.inquilino.email" id="email">
+				</div>
+			</div>
+			<br>
+			<label for="telefones">Telefones: </label>
+			<div class="row" id="telefones">
+				<div class="col-md-5">
+					<label for="telefone">Número</label>
+					<input 	class="form-control" type="text" ng-model="inquilinoCadCtrl.inquilino.telefone.numero" id="telefone"
+							ui-mask="(99)99999-9999">
+				</div>
+				<div class="col-md-5">
+					<label for="tipoTelefone">Tipo</label>
+					<select class="form-control" ng-model="inquilinoCadCtrl.inquilino.telefone.tipo" id="tipoTelefone">
+						<option ng-repeat="tipo in inquilinoCadCtrl.opcoesTipo" value="{{tipo.valor}}">{{tipo.nome}}
+						</option>
+					</select>
+				</div>
+				<div class="col col-md-2">
+					<label for="adicionar">&nbsp</label>
+					<input class="btn btn-primary" type="button" value="Adicionar"
+						ng-click="inquilinoCadCtrl.adicionar()" id="adicionar" />
+				</div>
+			</div>
+			<br>
+			<!-- <div class="row">
+				<div class="col-md-4">
+					<label for="cidade">Cidade</label>
+					<input class="form-control" type="number" ng-model="inquilinoCadCtrl.inquilino.cidade" id="cidade">
+				</div>
+				<div class="col-md-4">
+					<label for="estado">Estado</label>
+					<input class="form-control" type="text" ng-model="inquilinoCadCtrl.inquilino.estado" id="estado">
+				</div>
+				<div class="col-md-4">
+					<label for="numero">Número</label>
+					<input class="form-control" type="text" ng-model="inquilinoCadCtrl.inquilino.numero" id="numero">
+				</div>
+			</div>
+			<br> -->
+
+			<!--BOTÕES-->
+			<hr>
+			<div class="row justify-content-start">
+				<div class="col col-md-2">
+					<input class="btn btn-success" type="button" value="Voltar" ng-click="inquilinoCadCtrl.voltar()" />
+				</div>
+				<div class="col col-md-1 mr-auto">
+					<input 	class="btn btn-success" type="button" value="Limpar"
+							ng-click="inquilinoCadCtrl.limparTela()" />
+				</div>
+				<div class="col col-md-2">
+					<input class="btn btn-success" type="submit" value="Cadastrar" />
+				</div>
+			</div>
+		</form><!--FIM FORM-->
+	</div>
+</div>
