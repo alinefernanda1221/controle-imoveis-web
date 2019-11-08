@@ -1,0 +1,109 @@
+<div class="jumbotron" style="width: 100%;">
+	<h1>Cadastrar Imóvel
+		<i class="fas fa-home"></i>
+	</h1>
+	<hr>
+
+	<!--DADOS BÁSICOS-->
+	<h5 class="text-center">Dados Básicos</h5>
+	<hr style="width: 50%;">
+	<div class="d-flex justify-content-center">
+		<form ng-submit="imovelCadCtrl.cadastrarImovel()" novalidate id="form-cadastro-imovel" class="form form-group">
+			<div class="row">
+				<div class="col-md-6">
+					<label for="nome">Nome</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.nome" id="nome">
+				</div>
+				<div class="col-md-6">
+					<label for="quartos">Qtd. quartos</label>
+					<input class="form-control" type="number" ng-model="imovelCadCtrl.quartos" id="quartos">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="tipo">Tipo imóvel</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.tipoImovel" id="tipo">
+				</div>
+				<div class="col-md-6">
+					<label for="situacao">Situação</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.situacaoImovel" id="situacao">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<label for="descricao">Descrição</label>
+					<textarea class="form-control" rows="3" ng-model="imovelCadCtrl.descricao" id="descricao">
+					</textarea>
+				</div>
+			</div>
+			<br>
+
+			<!--DADOS ENDEREÇO-->
+			<h5 class="text-center">Dados de Endereço</h5>
+			<hr style="width: 50%;">
+			<div class="row">
+				<div class="col-md-6">
+					<label for="cep">Cep</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.cep" id="cep" ui-mask="99999-999">
+				</div>
+				<div class="col-md-6">
+					<label for="bairro">Bairro</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.bairro" id="bairro">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12">
+					<label for="logradouro">Logradouro</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.logradouro" id="logradouro">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-4">
+					<label for="cidade">Cidade</label>
+					<input class="form-control" type="number" ng-model="imovelCadCtrl.cidade" id="cidade">
+				</div>
+				<div class="col-md-4">
+					<label for="estado">Estado</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.estado" id="estado">
+				</div>
+				<div class="col-md-4">
+					<label for="numero">Número</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.numero" id="numero">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<label for="observacao">Observação</label>
+					<textarea class="form-control" rows="3" ng-model="imovelCadCtrl.observacao"
+						id="observacao"></textarea>
+				</div>
+			</div>
+			<br>
+
+			<!--BOTÕES-->
+			<hr>
+			<div class="container">
+				<div class="row justify-content-start">
+					<div class="col col-md-2">
+						<input class="btn btn-success" type="button" value="Voltar" ng-click="imovelCadCtrl.voltar()" />
+					</div>
+					<div class="col col-md-1 mr-auto">
+						<input class="btn btn-success" type="button" value="Limpar"
+							ng-click="imovelCadCtrl.limparTela()" />
+					</div>
+					<div class="col col-md-2">
+						<input class="btn btn-success" type="submit" value="Cadastrar" />
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--FIM FORM-->
+	</div>
+
+
+</div>

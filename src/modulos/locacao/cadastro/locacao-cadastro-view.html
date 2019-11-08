@@ -1,0 +1,151 @@
+<div class="jumbotron" style="width: 100%;">
+	<h1>Cadastrar Locação
+		<i class="fa fa-handshake"></i>
+	</h1>
+	<hr>
+
+	<!--DADOS BÁSICOS LOCAÇÃO-->
+	<h5 class="text-center">Dados Básicos
+	</h5>
+	<hr style="width: 50%;">
+	<div class="d-flex justify-content-center">
+		<form ng-submit="locacaoCadCtrl.cadastrarLocacao()" novalidate id="form-cadastro-locacao"
+			class="form form-group">
+			<div class="row">
+				<div class="col-md-6">
+					<label for="dataInicio">Data Início *</label>
+					<input class="form-control" type="date" ng-model="locacaoCadCtrl.locacao.dataInicio" required
+						id="dataInicio">
+				</div>
+				<div class="col-md-6">
+					<label for="dataFim">Data Fim *</label>
+					<input class="form-control" type="date" ng-model="locacaoCadCtrl.locacao.dataFim" id="dataFim">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12">
+					<label for="numeroContrato">Número Contrato</label>
+					<input class="form-control" type="text" ng-model="locacaoCadCtrl.locacao.numeroContrato"
+						id="numeroContrato">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="valorAluguel">Valor Aluguel *</label>
+					<input class="form-control" type="text" ng-model="locacaoCadCtrl.locacao.valorAluguel"
+						id="valorAluguel" ui-mask="R$ 9999,99">
+				</div>
+				<div class="col-md-6">
+					<label for="diaPagamento">Dia pagamento *</label>
+					<input class="form-control" type="number" ng-model="locacaoCadCtrl.locacao.diaPagamento"
+						id="diaPagamento">
+				</div>
+			</div>
+			<br>
+
+			<!--DADOS INQUILINO-->
+			<h5 class="text-center">Inquilino</h5>
+			<hr style="width: 50%;">
+			<label for="inputPesquisarInquilino">Pesquisar Inquilino </label>
+			<div class="input-group md form-group">
+				<input class="form-control" type="text" ng-model="locacaoCadCtrl.termoPesquisaInquilino" id="inputPesquisarInquilino"
+					placeholder="Nome, RG, ou CPF">
+				<div class="input-group-append">
+					<input class="btn btn-primary" type="button" value="Pesquisar" ng-click="locacaoCadCtrl.pesquisarInquilino()" id="pesquisarInquilino">
+				</div>
+				<table class="table table-hover" ng-hide="inquilinosPesquisados.size > 0" style="margin-top: 30px;">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nome</th>
+							<th>E-mail</th>
+							<th>RG</th>
+							<th>CPF</th>
+							<th>Principal?</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat='inquilino in locacaoCadCtrl.inquilinosPesquisados track by $index'>
+						<td>
+							<div class="checkbox checkbox-primary">
+								<!-- <input type="checkbox" ng-model="inquilino.marcado" id="inquilinoSelecao" ng-click="locacaoCadCtrl.selecionarInquilino(inquilino)"> -->
+								<input type="checkbox" ng-model="inquilino.marcado" id="inquilinoSelecao" ng-init="inquilino.marcado = false">
+							</div>
+						</td>
+						<td>{{inquilino.nome}}</td>
+						<td>{{inquilino.email}}</td>
+						<td>{{inquilino.rg}}</td>
+						<td>{{inquilino.cpf}}</td>
+						<td>
+							<div class="checkbox checkbox-primary text-center">
+								<input 	type="checkbox" ng-model="inquilino.selecionado" id="inquilinoPrincipal" ng-init="inquilino.selecionado = false" 
+										ng-click="locacaoCadCtrl.atualizaSelecaoInquilino(inquilino, locacaoCadCtrl.inquilinosPesquisados)">
+							</div>
+						</td>
+					</tbody>
+				</table>
+				<!-- <hr style="width: 100%;">
+				<input class="btn btn-primary ml-auto" type="button" value="Selecionar" ng-click="locacaoCadCtrl.adicionarInquilinos()"> -->
+				<br>
+			</div>
+			<br>
+
+			<!--DADOS IMOVEL-->
+			<h5 class="text-center">Imóvel</h5>
+			<hr style="width: 50%;">
+			<label for="inputPesquisarImovel">Pesquisar Imóvel </label>
+			<div class="input-group md form-group">
+				<input class="form-control" type="text" ng-model="locacaoCadCtrl.termoPesquisaImovel" id="inputPesquisarImovel"
+					placeholder="Nome, Estado, Bairro, Endereço">
+				<div class="input-group-append">
+					<input class="btn btn-primary" type="button" value="Pesquisar" ng-click="locacaoCadCtrl.pesquisarImovel()" id="pesquisarImovel">
+				</div>
+				<table class="table table-hover" ng-hide="imoveisPesquisados.size > 0" style="margin-top: 30px;">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Imovel</th>
+							<th>Endereço</th>
+							<th>Estado</th>
+							<th>Bairro</th>
+							<th>Tipo</th>
+						</tr>
+					</thead>
+					<tbody ng-repeat='imovel in locacaoCadCtrl.imoveisPesquisados track by $index'>
+						<td>
+							<div class="checkbox checkbox-primary">
+								<input type="checkbox" ng-model="imovel.selecionado" id="imovelSelecao" 
+									ng-click="locacaoCadCtrl.atualizaSelecao(imovel, locacaoCadCtrl.imoveisPesquisados)">
+							</div>
+						</td>
+						<td>{{imovel.nome}}</td>
+						<td>{{imovel.endereco}}</td>
+						<td>{{imovel.estado}}</td>
+						<td>{{imovel.bairro}}</td>
+						<td>{{imovel.tipo}}</td>
+					</tbody>
+				</table>
+			</div>
+			<br>
+
+			<!--BOTÕES-->
+			<hr>
+			<div class="row justify-content-start">
+				<div class="col col-md-2">
+					<input class="btn btn-success" type="button" value="Voltar" ng-click="locacaoCadCtrl.voltar()" />
+				</div>
+				<div class="col col-md-1">
+					<input class="btn btn-success" type="button" value="Limpar"
+						ng-click="locacaoCadCtrl.limparTela()" />
+				</div>
+				<div class="col col-md-2 ml-auto">
+					<input class="btn btn-success" type="submit" value="Cadastrar" />
+				</div>
+			</div>
+		</form>
+		<!--FIM FORM-->
+	</div>
+
+
+</div>
