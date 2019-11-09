@@ -3,52 +3,79 @@ import { inherit } from "@uirouter/core";
 export default class InquilinoCadastroController {
 
   constructor(InquilinoService) {
-    var vm = this;
-    vm.limparTela = limparTela;
+    let vm = this;
     vm.voltar = voltar;
-    vm.opcoesSexo = [];
-    vm.opcoesTipo = [];
+    vm.limpar = limpar;
+    vm.formIsValid = true;
     vm.inquilino = {};
+    vm.inquilino.telefones = [];
+
+    vm.telefone = {};
+
     init();
 
     function init() {
-      vm.opcoesSexo = [
-        { nome: 'FEMININO', sigla: 'F' },
-        { nome: 'MASCULINO', sigla: 'M' }
-      ];
-
       vm.opcoesTipo = [
-        { nome: 'TIPO_UM', valor: 'UM' },
-        { nome: 'TIPO_DOIS', valor: 'DOIS' },
-        { nome: 'TIPO_TRES', valor: 'TRES' },
-        { nome: 'TIPO_QUATRO', valor: 'QUATRO' }
+        { nome: 'TRABALHO', valor: '1'},
+        { nome: 'CELULAR', valor: '2'},
+        { nome: 'RESIDENCIAL', valor: '3'},
+      ];
+
+      vm.opcoesSexo = [
+        { nome: 'MASCULINO', sigla: 'M' },
+        { nome: 'FEMININO', sigla: 'F' }
       ];
     }
 
-    vm.cadastrarInquilino = function () {
-      console.log(vm.inquilino);
-
-      InquilinoService.cadastrarInquilino(vm.inquilino)
+    vm.cadastrarInquilino = function(){
+      if(vm.formCadastroInquilino.$valid){
+        vm.formIsValid = true;
+        
+        InquilinoService.cadastrarInquilino(vm.inquilino)
         .then((response) => {
-          alert('Gravado com sucesso!');
-          vm.inquilino = {};
-          limparTela();
+          vm.limpar();
+          alert("Inquilino cadastrado com sucesso!");
         }).catch((error) => {
-          alert('Ocorreu um erro!' + error.data.message);
+          alert("Ocorreu um erro! " + error.data);
         });
+
+      }else{
+        vm.formIsValid = false
+      }
     }
 
-    vm.adicionaTelefone = function (telefone) {
-      vm.inquilino.telefone.push(angular.copy(telefone));
+    vm.adicionarTelefone = function(telefone){
+      vm.inquilino.telefones.push(angular.copy(telefone));
+      vm.telefone = {};
+      vm.desabilitar();
     }
 
-    vm.excluirTelefone = function (telefone) {
-      let index = vm.inquilino.telefone.indexOf(telefone);
-      vm.inquilino.telefone.splice(index, 1);
+    vm.removerTelefone = function(index){
+      vm.inquilino.telefones.splice(index, 1)
     }
 
-    function limparTela() {
-      document.getElementById("form-cadastro-inquilino").reset();
+    vm.habilitar = function(){
+      vm.habilitarBotao = true;
+    }
+
+    vm.desabilitar = function(){
+      vm.habilitarBotao = false;
+    }
+
+    function limpar(){
+      vm.formCadastroInquilino.$setUntouched();
+      document.getElementById("form-cadastro-inquilino").reset(); // Reseta Form
+      vm.inquilino = {};
+    }
+
+    vm.retornaNomeTipo = function(telefone){
+      let stringRetornada = "";
+      vm.opcoesTipo.forEach((opcao) => {
+        if(opcao.valor === telefone.tipo){
+          stringRetornada =  opcao.nome;
+        }
+      });
+      return stringRetornada;
     }
 
     function voltar() {
