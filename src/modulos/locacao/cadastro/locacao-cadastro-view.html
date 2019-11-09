@@ -9,38 +9,47 @@
 	</h5>
 	<hr style="width: 50%;">
 	<div class="d-flex justify-content-center">
-		<form ng-submit="locacaoCadCtrl.cadastrarLocacao()" novalidate id="form-cadastro-locacao"
-			class="form form-group">
+		<form ng-submit="locacaoCadCtrl.cadastrarLocacao()" novalidate id="form-cadastro-locacao" name="locacaoCadCtrl.formCadastroLocacao"
+				class="form form-group">
 			<div class="row">
 				<div class="col-md-6">
-					<label for="dataInicio">Data Início *</label>
-					<input class="form-control" type="date" ng-model="locacaoCadCtrl.locacao.dataInicio" required
-						id="dataInicio">
+					<label ng-class="{ 'text-danger' : locacaoCadCtrl.formCadastroLocacao.dataInicio.$invalid && !locacaoCadCtrl.formIsValid }" 
+							for="dataInicio">Data Início *</label>
+					<input class="form-control" type="date" ng-model="locacaoCadCtrl.locacao.dataInicio" required id="dataInicio"
+							ng-class="{ 'is-invalid' : locacaoCadCtrl.formCadastroLocacao.dataInicio.$invalid && !locacaoCadCtrl.formIsValid }"
+							name="dataInicio">
 				</div>
 				<div class="col-md-6">
-					<label for="dataFim">Data Fim *</label>
-					<input class="form-control" type="date" ng-model="locacaoCadCtrl.locacao.dataFim" id="dataFim">
+					<label ng-class="{ 'text-danger' : locacaoCadCtrl.formCadastroLocacao.dataFim.$invalid && !locacaoCadCtrl.formIsValid }" 
+							for="dataFim">Data Fim *</label>
+					<input class="form-control" type="date" ng-model="locacaoCadCtrl.locacao.dataFim" required id="dataFim"
+							ng-class="{ 'is-invalid' : locacaoCadCtrl.formCadastroLocacao.dataFim.$invalid && !locacaoCadCtrl.formIsValid }"
+							name="dataFim">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-12">
 					<label for="numeroContrato">Número Contrato</label>
-					<input class="form-control" type="text" ng-model="locacaoCadCtrl.locacao.numeroContrato"
-						id="numeroContrato">
+					<input class="form-control" type="text" ng-model="locacaoCadCtrl.locacao.numeroContrato" id="numeroContrato"
+							limit-to="30">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-6">
-					<label for="valorAluguel">Valor Aluguel *</label>
-					<input class="form-control" type="text" ng-model="locacaoCadCtrl.locacao.valorAluguel"
-						id="valorAluguel" ui-mask="R$ 9999,99">
+					<label ng-class="{ 'text-danger' : locacaoCadCtrl.formCadastroLocacao.valorAluguel.$invalid && !locacaoCadCtrl.formIsValid }" 
+							for="valorAluguel">Valor Aluguel *</label>
+					<input class="form-control" type="text" ng-model="locacaoCadCtrl.locacao.valorAluguel" id="valorAluguel" ui-mask="R$ 9999,99"
+							ng-class="{ 'is-invalid' : locacaoCadCtrl.formCadastroLocacao.valorAluguel.$invalid && !locacaoCadCtrl.formIsValid }"
+							name="valorAluguel">
 				</div>
 				<div class="col-md-6">
-					<label for="diaPagamento">Dia pagamento *</label>
-					<input class="form-control" type="number" ng-model="locacaoCadCtrl.locacao.diaPagamento"
-						id="diaPagamento">
+					<label ng-class="{ 'text-danger' : locacaoCadCtrl.formCadastroLocacao.diaPagamento.$invalid && !locacaoCadCtrl.formIsValid }" 
+							for="diaPagamento">Dia pagamento *</label>
+					<input class="form-control" type="number" ng-model="locacaoCadCtrl.locacao.diaPagamento" required id="diaPagamento"
+							ng-class="{ 'is-invalid' : locacaoCadCtrl.formCadastroLocacao.diaPagamento.$invalid && !locacaoCadCtrl.formIsValid }"
+							name="diaPagamento" limit-to="2" ng-maxvalue="31">
 				</div>
 			</div>
 			<br>
@@ -55,7 +64,7 @@
 				<div class="input-group-append">
 					<input class="btn btn-primary" type="button" value="Pesquisar" ng-click="locacaoCadCtrl.pesquisarInquilino()" id="pesquisarInquilino">
 				</div>
-				<table class="table table-hover" ng-hide="inquilinosPesquisados.size > 0" style="margin-top: 30px;">
+				<table class="table table-hover text-center" ng-hide="inquilinosPesquisados.size > 0" style="margin-top: 30px;">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -101,7 +110,7 @@
 				<div class="input-group-append">
 					<input class="btn btn-primary" type="button" value="Pesquisar" ng-click="locacaoCadCtrl.pesquisarImovel()" id="pesquisarImovel">
 				</div>
-				<table class="table table-hover" ng-hide="imoveisPesquisados.size > 0" style="margin-top: 30px;">
+				<table class="table table-hover text-center" ng-hide="imoveisPesquisados.size > 0" style="margin-top: 30px;">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -137,7 +146,7 @@
 				</div>
 				<div class="col col-md-1">
 					<input class="btn btn-success" type="button" value="Limpar"
-						ng-click="locacaoCadCtrl.limparTela()" />
+						ng-click="locacaoCadCtrl.limpar()" />
 				</div>
 				<div class="col col-md-2 ml-auto">
 					<input class="btn btn-success" type="submit" value="Cadastrar" />

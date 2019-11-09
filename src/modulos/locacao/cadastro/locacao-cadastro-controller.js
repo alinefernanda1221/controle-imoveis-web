@@ -4,8 +4,9 @@ export default class LocacaoCadastroController {
 
   constructor(LocacaoService, $q) {
     var vm = this;
-    vm.limparTela = limparTela;
+    vm.limpar = limpar;
     vm.voltar = voltar;
+    vm.formIsValid = true;
     vm.locacao = {};
     vm.locacao.inquilinos = [];
     init();
@@ -27,39 +28,26 @@ export default class LocacaoCadastroController {
       ];
 
       vm.inquilinosPesquisados = [
-        { nome: 'Aline Fernanda Pereira de Carvalho',
-          email: 'alinefernanda2112@gmail.com',
+        { nome: 'Aline  Carvalho',
+          email: 'aline@gmail.com',
           rg: 123456,
           cpf: 12345678912345
         },
-        { nome: 'João Lucas Pereira Carvalho',
-          email: 'jl36523@gmail.com',
+        { nome: 'João Lucas',
+          email: 'jl@gmail.com',
           rg: 654321,
           cpf: 98765432198765
         },
-        { nome: 'Marcos Henrique Pereira Carvalho',
-          email: 'marcos_henrique@gmail.com',
+        { nome: 'Marcos Pereira',
+          email: 'marcos@gmail.com',
           rg: 456789,
           cpf: 45612378932145
         }
       ]
     }
 
-    // vm.adicionarInquilinos = function(){
-    //   console.log("Adicionar Inquilinos");
-      
-    //   vm.imoveisPesquisados.forEach((imovel) => {
-    //     if(!!imovel.selecionado){
-    //       vm.locacao.imovel = angular.copy(imovel);
-    //       return;
-    //     }
-    //   });
-      
-    //   console.log("Imovel Selecionado: ", vm.locacao.imovel);
-    // }
-
     vm.selecionarInquilinos = function(){
-      let existePrincipal = false;
+      vm.existePrincipal = false;
       vm.locacao.inquilinos = [];
 
       vm.inquilinosPesquisados.forEach((inquilino) => {
@@ -68,13 +56,14 @@ export default class LocacaoCadastroController {
         }
 
         if(!!inquilino.selecionado){
-          existePrincipal = true;
+          return vm.existePrincipal = true;
         }
       });
 
       // console.log("Inquilinos Marcados", vm.locacao.inquilinos);
-      if(!existePrincipal){
-        alert("Erro! Ao menos 1 inquilino deve ser marcado como principal.")
+      if(!vm.existePrincipal){
+        alert("Erro! Ao menos 1 inquilino deve ser marcado como principal.");
+        return;
       }
     }
 
@@ -100,35 +89,48 @@ export default class LocacaoCadastroController {
     }
 
     vm.selecionarImovel = function(){
-      let existeImovelSelecionado = false;
+      vm.existeImovelSelecionado = false;
       vm.imoveisPesquisados.forEach((imovel) => {
         if(!!imovel.selecionado){
           vm.locacao.imovel = imovel;
-          existeImovelSelecionado = true;
+          vm.existeImovelSelecionado = true;
         }
       });
 
-      if(!existeImovelSelecionado){
+      if(!vm.existeImovelSelecionado){
         alert("Erro! Ao menos 1 imóvel deve ser selecionado.")
       }
     }
 
-    vm.cadastrarLocacao = function(){
-      vm.selecionarInquilinos();
-      vm.selecionarImovel();
-
-      LocacaoService.cadastrarLocacao(vm.locacao)
-        .then((response) => {
-          alert('Gravado com sucesso!');
-          vm.locacao = {};
-          limparTela();
-        }).catch((error) => {
-          alert('Ocorreu um erro!' + error.data);
-        });
+    function podeProsseguirCadastro(){
+      return vm.existePrincipal && vm.existeImovelSelecionado;
     }
 
-    function limparTela() {
-      document.getElementById("form-cadastro-inquilino").reset();
+    vm.cadastrarLocacao = function(){
+      if(vm.formCadastroLocacao.$valid){
+        vm.formIsValid = true;
+        vm.selecionarInquilinos();
+        vm.selecionarImovel();
+        
+        if(podeProsseguirCadastro()){
+          LocacaoService.cadastrarLocacao(vm.locacao)
+            .then((response) => {
+              alert('Gravado com sucesso!');
+              limpar();
+            }).catch((error) => {
+              alert('Ocorreu um erro!' + error.data);
+            });
+        }
+
+      }else{
+        vm.formIsValid = false
+      }
+    }
+
+    function limpar(){
+      vm.formCadastroLocacao.$setUntouched();
+      document.getElementById("form-cadastro-locacao").reset(); // Reseta Form
+      vm.locacao = {};
     }
 
     function voltar() {
