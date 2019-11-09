@@ -8,36 +8,43 @@
 	<h5 class="text-center">Dados Básicos</h5>
 	<hr style="width: 50%;">
 	<div class="d-flex justify-content-center">
-		<form class="form form-group needs-validation" ng-submit="imovelCadCtrl.cadastrarImovel()" id="form-cadastro-imovel" name="imovelCadCtrl.formCadastroImovel"  novalidate>
+		<form class="form form-group" ng-submit="imovelCadCtrl.cadastrarImovel()" id="form-cadastro-imovel" name="imovelCadCtrl.formCadastroImovel"  novalidate>
 			<div class="row">
 				<div class="col-md-6">
 					<label for="nome">Nome</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.nome" limit-to="30" id="nome">
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.imovel.nome" limit-to="30" id="nome">
 				</div>
 				<div class="col-md-6">
 					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.quartos.$invalid && !imovelCadCtrl.formIsValid }" for="quartos">Qtd. quartos *</label>
-					<input class="form-control" type="number" limit-to="2" ng-model="imovelCadCtrl.quartos" required name="quartos" id="quartos"
-							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.quartos.$invalid && !imovelCadCtrl.formIsValid }">
+					<input class="form-control" type="number" limit-to="2" ng-model="imovelCadCtrl.imovel.quartos" required name="quartos"
+						id="quartos"
+						ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.quartos.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-6">
 					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.tipo.$invalid && !imovelCadCtrl.formIsValid }" for="tipo">Tipo imóvel *</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.tipoImovel" required id="tipo" name="tipo"
-							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.tipo.$invalid && !imovelCadCtrl.formIsValid }">
+					<select class="form-control" ng-model="imovelCadCtrl.imovel.tipoImovel" required id="tipo" name="tipo"
+							 ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.tipo.$invalid && !imovelCadCtrl.formIsValid }">
+						<option ng-repeat="tipo in imovelCadCtrl.tiposImovel" value="{{ tipo.valor }}">{{ tipo.nome }}</option>
+					</select>
 				</div>
 				<div class="col-md-6">
 					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.situacao.$invalid && !imovelCadCtrl.formIsValid }" for="situacao">Situação *</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.situacaoImovel" required id="situacao" name="situacao"
-							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.situacao.$invalid && !imovelCadCtrl.formIsValid }">
+					<select class="form-control" ng-model="imovelCadCtrl.imovel.situacaoImovel" required id="situacao" name="situacao"
+							 ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.situacao.$invalid && !imovelCadCtrl.formIsValid }">
+						<option ng-repeat="situacao in imovelCadCtrl.situacoesImovel" value="{{ situacao.valor }}">
+							{{ situacao.nome }}
+						</option>
+					</select>
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<label for="descricao">Descrição</label>
-					<textarea class="form-control" rows="3" maxlength="200" ng-model="imovelCadCtrl.descricao" id="descricao">
+					<textarea class="form-control" rows="3" maxlength="200" ng-model="imovelCadCtrl.imovel.descricao" id="descricao">
 					</textarea>
 				</div>
 			</div>
@@ -49,18 +56,21 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label for="cep">Cep</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.cep" id="cep" ui-mask="99999-999">
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.imovel.endereco.cep" id="cep" ui-mask="99999-999">
 				</div>
 				<div class="col-md-6">
 					<label for="bairro">Bairro</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.bairro" id="bairro">
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.imovel.endereco.bairro" limit-to="30" id="bairro">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-12">
-					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.logradouro.$invalid && !imovelCadCtrl.formIsValid }" for="logradouro">Logradouro *</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.logradouro" required id="logradouro" name="logradouro"
+					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.logradouro.$invalid && !imovelCadCtrl.formIsValid }" 
+							for="logradouro">Logradouro *
+					</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.imovel.endereco.logradouro" required id="logradouro" 
+							name="logradouro" limit-to="100"
 							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.logradouro.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 			</div>
@@ -68,23 +78,26 @@
 			<div class="row">
 				<div class="col-md-4">
 					<label for="cidade">Cidade </label>
-					<input class="form-control" type="number" ng-model="imovelCadCtrl.cidade" id="cidade">
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.imovel.endereco.cidade" limit-to="30" id="cidade">
 				</div>
 				<div class="col-md-4">
-					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.estado.$invalid && !imovelCadCtrl.formIsValid }" for="estado">Estado *</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.estado" required id="estado" name="estado"
+					<label ng-class="{ 'text-danger' : imovelCadCtrl.formCadastroImovel.estado.$invalid && !imovelCadCtrl.formIsValid }" 
+							for="estado">Estado *
+					</label>
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.imovel.endereco.estado" required id="estado" name="estado"
+							limit-to="2"
 							ng-class="{ 'is-invalid' : imovelCadCtrl.formCadastroImovel.estado.$invalid && !imovelCadCtrl.formIsValid }">
 				</div>
 				<div class="col-md-4">
 					<label for="numero">Número</label>
-					<input class="form-control" type="text" ng-model="imovelCadCtrl.numero" id="numero">
+					<input class="form-control" type="text" ng-model="imovelCadCtrl.imovel.endereco.numero" limit-to="4" id="numero">
 				</div>
 			</div>
 			<br>
 			<div class="row">
 				<div class="col-md-12 form-group">
 					<label for="observacao">Observação</label>
-					<textarea class="form-control" maxlength="200" rows="3" ng-model="imovelCadCtrl.observacao" id="observacao"></textarea>
+					<textarea class="form-control" maxlength="200" rows="3" ng-model="imovelCadCtrl.imovel.endereco.observacao" id="observacao"></textarea>
 				</div>
 			</div>
 			<br>
@@ -93,13 +106,13 @@
 			<hr>
 			<div class="container">
 				<div class="row justify-content-start">
-					<div class="col col-md-2 mr-auto">
+					<div class="col col-md-2">
 						<input class="btn btn-success" type="button" value="Voltar" ng-click="imovelCadCtrl.voltar()" />
 					</div>
-					<!-- <div class="col col-md-1 mr-auto">
+					<div class="col col-md-1 mr-auto">
 						<input class="btn btn-success" type="button" value="Limpar"
-							ng-click="imovelCadCtrl.limparTela()" />
-					</div> -->
+							ng-click="imovelCadCtrl.limpar()" />
+					</div>
 					<div class="col col-md-2">
 						<input class="btn btn-success" type="submit" value="Cadastrar" />
 					</div>
