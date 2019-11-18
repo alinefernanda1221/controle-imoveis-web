@@ -5,7 +5,7 @@ import ImovelEdicaoController from './imovel-edicao-controller';
 
 import ImovelService from '../../../servicos/imovel-service';
 
-export default angular.module('myApp.edicao', [uirouter, ImovelService])
+export default angular.module('myApp.imovel.edicao', [uirouter, ImovelService])
   .controller('ImovelEdicaoController', ImovelEdicaoController)
   .name;
 

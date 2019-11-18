@@ -69,6 +69,17 @@ export default function routing($stateProvider, $urlRouterProvider) {
   }
   $stateProvider.state(imovelPesquisa);
 
+  let imovelEditar = {
+    name: 'imovel-edicao',
+    url: '/imovel/editar',
+    templateUrl: './modulos/imovel/edicao/imovel-edicao-view.html',
+    controller: 'ImovelEdicaoController',
+    controllerAs: 'imovelEdicaoCtrl',
+    params: { imovel: null }
+
+  }
+  $stateProvider.state(imovelEditar);
+
   /**INQUILINO */
   let inquilinoState = {
     name: 'inquilino-cadastro',
