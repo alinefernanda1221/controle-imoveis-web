@@ -8,7 +8,7 @@
 		<input class="form-control" type="text" ng-model="imovelPesquisaCtrl.codigoPesquisaImovel" id="inputPesquisarImovel"
 			placeholder="Informe o código do imóvel ou clique em pesquisar para buscar todos">
 		<div class="input-group-append">
-			<button class="btn btn-primary" type="button" ng-click="imovelPesquisaCtrl.pesquisarImovel()" id="pesquisarImovel">
+			<button class="btn btn-success" type="button" ng-click="imovelPesquisaCtrl.pesquisarImovel()" id="pesquisarImovel">
 				<i class="fa fa-search"></i> Pesquisar
 			</button>
 		</div>
@@ -16,11 +16,11 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Imovel</th>
-					<th>Endereço</th>
-					<th>Estado</th>
-					<th>Bairro</th>
-					<th>Tipo</th>
+					<th><a href="">Imovel</a></th>
+					<th><a href="">Endereço</a></th>
+					<th><a href="">Estado</a></th>
+					<th><a href="">Bairro</a></th>
+					<th><a href="">Tipo</a></th>
 				</tr>
 			</thead>
 			<tbody ng-repeat='imovel in imovelPesquisaCtrl.imoveisPesquisados track by $index'>
