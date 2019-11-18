@@ -1,13 +1,45 @@
-<div class="jumbotron text-center" style="width: 100%;">
+<div class="jumbotron" style="width: 100%;">
 	<h1>Pesquisar Imóvel
 		<i class="fas fa-home"></i>
 	</h1>
 	<hr>
-	
-
-
+	<label for="inputPesquisarImovel">Pesquisar Imóvel </label>
+	<div class="input-group md form-group">
+		<input class="form-control" type="text" ng-model="imovelPesquisaCtrl.codigoPesquisaImovel" id="inputPesquisarImovel"
+			placeholder="Informe o código do imóvel ou clique em pesquisar para buscar todos">
+		<div class="input-group-append">
+			<button class="btn btn-primary" type="button" ng-click="imovelPesquisaCtrl.pesquisarImovel()" id="pesquisarImovel">
+				<i class="fa fa-search"></i> Pesquisar
+			</button>
+		</div>
+		<table class="table table-hover text-center" style="background-color: white; margin-top: 30px;" ng-if="imovelPesquisaCtrl.imoveisPesquisados.length > 0" style="margin-top: 30px;">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Imovel</th>
+					<th>Endereço</th>
+					<th>Estado</th>
+					<th>Bairro</th>
+					<th>Tipo</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat='imovel in imovelPesquisaCtrl.imoveisPesquisados track by $index'>
+				<td>
+					<a href="" ng-click="imovelPesquisaCtrl.editarImovel(imovel)">
+						<i class="fas fa-edit" style="color: black"></i>
+					</a>
+				</td>
+				<td>{{imovel.nome}}</td>
+				<td>{{imovel.endereco.logradouro}}</td>
+				<td>{{imovel.endereco.estado}}</td>
+				<td>{{imovel.endereco.bairro}}</td>
+				<td>{{imovel.tipo.nome}}</td>
+			</tbody>
+		</table>
+	</div>
+	<br>
 	<hr>
-	<button class="btn btn-primary pull-left" ng-click="imovelHomeCtrl.voltar()" id="botaoVoltar">
+	<button class="btn btn-primary pull-left" ng-click="imovelPesquisaCtrl.voltar()" id="botaoVoltar">
 		<i class="fa fa-arrow-left"></i> Voltar
 	</button>
 </div>
