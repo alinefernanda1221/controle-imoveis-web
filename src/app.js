@@ -35,6 +35,7 @@ import routing from './app.config';
 import imovelHome from './modulos/imovel/home/imovel-home.js';
 import imovelCadastro from './modulos/imovel/cadastro/imovel-cadastro.js';
 import imovelEdicao from './modulos/imovel/edicao/imovel-edicao.js';
+import imovelPesquisa from './modulos/imovel/pesquisa/imovel-pesquisa';
 
 /**INQUILINO */
 import inquilinoHome from './modulos/inquilino/home/inquilino-home.js';
@@ -62,6 +63,7 @@ angular
   imovelHome,
   imovelCadastro,
   imovelEdicao,
+  imovelPesquisa,
   inquilinoHome,
   inquilinoCadastro,
   locacaoHome,
