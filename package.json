@@ -29,6 +29,7 @@
   "dependencies": {
     "angular": "^1.7.5",
     "angular-block-ui": "^0.2.2",
+    "angular-ui-bootstrap": "^2.5.6",
     "angular-ui-mask": "^1.8.7",
     "angular-ui-router": "^1.0.23",
     "awesome-bootstrap-checkbox": "^1.0.1",

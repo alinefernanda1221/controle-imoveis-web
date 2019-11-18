@@ -6,6 +6,8 @@ import uirouter from 'angular-ui-router';
 let blockUI = require('angular-block-ui');
 let uiMask = require('angular-ui-mask');
 import diretivas from './diretivas/diretivas.js';
+let uiBootstrap = require('angular-ui-bootstrap');
+
 
 /**ESTILOS E FRAMEWORKS VISUAIS */
 import 'bootstrap';
@@ -47,6 +49,7 @@ import relatorioHome from './modulos/relatorios/home/relatorio-home.js';
 
 angular
 .module('myApp', [
+  uiBootstrap,
   diretivas,
   uirouter,
   uiMask,
